@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  opacity: 0.5;
+  color: #000;
+}
+
+.tile {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.content {
+  font-size: 16px;
+}
