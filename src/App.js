@@ -7,8 +7,11 @@ import Home from './screens/home';
 import {createBrowserRouter,RouterProvider} from 'react-router-dom';
 import {store} from './redux/store';
 import {Provider } from 'react-redux';
+import SignupForm from './components/authComps/signup';
+
 
 function App() {
+  
   const router=createBrowserRouter([
     {
       path:'/',
@@ -18,10 +21,15 @@ function App() {
         { path: "home", element: <Home /> },
         { path: "cart", element: <Cart /> },
         { path: "products", element: <Products /> },
+        { path: "signup", element: <SignupForm /> },
+        
       ],
     },
     
   ])
+
+  // const auth=app.auth()
+  // console.log("auth obj",auth);
   return (
     <Provider store={store}>
       <div className="App px-4">
