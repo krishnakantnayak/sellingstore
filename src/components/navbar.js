@@ -2,25 +2,26 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { Outlet  } from 'react-router-dom';
 import {auth} from '../config/firebase';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { signOutUser } from '../redux/reducers/userReducer';
 
 
 const MyNavbar = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
+  const uselector=useSelector((state)=>state.user);
+
+  const dispathSignout=useDispatch();
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
     });
+
   }, []);
 
-  const signOutUser = () => {
-    auth.signOut()
-      .then(() => {
-        console.log('User signed out');
-      })
-      .catch((error) => {
-        console.error('Error signing out: ', error);
-      });
+  const handlesignOutUser = () => {
+
+    dispathSignout(signOutUser({auth:auth}));
   };
     return (
       <>
@@ -35,7 +36,8 @@ const MyNavbar = () => {
             <Nav.Link href='products'>Sell</Nav.Link>
             
             <Nav.Link className='flex-row-reverse' href="#profile">Profile</Nav.Link>
-            {currentUser && <Nav.Link className='flex-row-reverse' onClick={signOutUser}>Signout</Nav.Link>}
+            {console.log(uselector.user.success,"uselector",uselector)}
+            {uselector.user.success && <Nav.Link className='flex-row-reverse' onClick={handlesignOutUser}>Signout</Nav.Link>}
             <Nav.Link>Cart</Nav.Link>
           </Nav>
           

@@ -9,15 +9,16 @@ import { useEffect, useState } from "react";
 
 export default function Products() {
   const prods = useSelector((state) => state.product);
-  const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-    });
-  }, []);
-  if (!currentUser) {
-    // #not logged
+  // const [currentUser, setCurrentUser] = useState(null);
+  const currentUser = useSelector((state) => state.user);
+
+  // useEffect(() => {
+  //     auth.onAuthStateChanged((user) => {
+  //     setCurrentUser(user);
+  //     });
+  // }, []);
+  if (currentUser.user.success) {
     return (
       <>
         {console.log(currentUser)}
