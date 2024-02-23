@@ -8,7 +8,8 @@ function SignupForm() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    name:""
+    name:"",
+    phone:""
   });
   const dispatchNewUser=useDispatch();
 
@@ -37,6 +38,13 @@ function SignupForm() {
           name="name"
           placeholder="Name"
           value={formData.name}
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone"
+          value={formData.phone}
           onChange={handleInputChange}
         />
        

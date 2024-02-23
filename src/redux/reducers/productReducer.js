@@ -1,5 +1,27 @@
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {fDB} from '../../config/firebase'
+import {  doc, setDoc, updateDoc ,collection, arrayUnion} from "firebase/firestore";
+
+export const addProduct=createAsyncThunk(
+    'prod/add',
+    async ({user,product},{ rejectWithValue,dispatch })=>{
+        try{
+            const docref=doc(collection(fDB,"products"));
+            await setDoc(docref,{"prodSellerId":user.userInfo.user.uid, ...product});
+            console.log("docref",docref.id);
+            // await updateDoc(user.userInfo.user.uid, {
+            //     productIdList: arrayUnion(docref.id),
+            //   });
+            const userdocref=doc(collection(fDB,"users"),user.userInfo.user.uid);
+            console.log("user",userdocref);
+        }
+        catch (error) {
+            console.log("error in u",error)
+            return rejectWithValue(error.message);
+          }
+    }
+)
 
 const initialState={
     products:[

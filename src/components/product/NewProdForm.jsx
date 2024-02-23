@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { productAction } from '../../redux/reducers/productReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
+import { addProduct } from '../../redux/reducers/productReducer';
 
 function MyForm() {
   const [form, setForm] = useState({
@@ -11,6 +12,7 @@ function MyForm() {
     sellerId:'',
     price:''
   });
+  const uselector=useSelector((state)=>state.user);
   const dispatch=useDispatch();
 
   const handleChange = (e) => {
@@ -26,7 +28,8 @@ function MyForm() {
     e.preventDefault();
     
     console.log(form);
-    dispatch(productAction.add(form))
+    dispatch(productAction.add(form));
+    dispatch(addProduct({user:uselector.user,product:form}))
   };
 
   return (

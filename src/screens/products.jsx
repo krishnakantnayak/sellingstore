@@ -4,20 +4,21 @@ import {  useSelector } from 'react-redux';
 import ProductTile from '../components/product/productTile'
 import SignupForm from '../components/authComps/signup';
 import SigninForm from '../components/authComps/signin';
-import {auth} from '../config/firebase';
-import { useEffect, useState } from 'react';
+
 
 
 export default function Products(){
     const prods=useSelector((state)=>state.product);
-    const [currentUser, setCurrentUser] = useState(null);
 
-    useEffect(() => {
-        auth.onAuthStateChanged((user) => {
-        setCurrentUser(user);
-        });
-    }, []);
-    if(currentUser){
+    // const [currentUser, setCurrentUser] = useState(null);
+    const currentUser=useSelector((state)=>state.user);
+
+    // useEffect(() => {
+    //     auth.onAuthStateChanged((user) => {
+    //     setCurrentUser(user);
+    //     });
+    // }, []);
+    if(currentUser.user.success){
         return (
             <>
             {console.log(currentUser)}
